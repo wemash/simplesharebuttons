@@ -1,5 +1,17 @@
 ﻿<?php
 
+function ssba_generate_input($social, $socialFriendly){
+    $htmlShareRow .= '<tr valign="top">';
+            $htmlShareRow .= '<th scope="row" style="width: 120px;"><label>'.$socialFriendly.':</label></th>';
+            $htmlShareRow .= '<td>';
+            $htmlShareRow .= '<input id="ssba_custom_'.$social.'" type="text" size="50" name="ssba_custom_'.$social.'" value="' . (isset($arrSettings['ssba_custom'.$social]) ? $arrSettings['ssba_custom_'.$social] : NULL)  . '" />';
+            $htmlShareRow .= '<input id="upload_'.$social.'_button" data-ssba-input="ssba_custom_'.$social.'" class="button customUpload" type="button" value="Upload Image" />';
+            $htmlShareRow .= '</td>';
+    $htmlShareRow .= '</tr>';
+    
+    return $htmlShareRow;
+}
+
 function ssba_admin_panel($arrSettings, $htmlSettingsSaved) {
 
 	// variables
@@ -103,97 +115,58 @@ function ssba_admin_panel($arrSettings, $htmlSettingsSaved) {
 				$htmlShareButtonsForm .= '<div id="ssba-custom-images"' . ($arrSettings['ssba_image_set'] != 'custom' ? 'style="display: none;"' : NULL) . '>';
 				$htmlShareButtonsForm .= '<h4>Custom Images</h4>';
 				$htmlShareButtonsForm .= '<table class="form-table">';
-					$htmlShareButtonsForm .= '<tr valign="top">';
-						$htmlShareButtonsForm .= '<th scope="row" style="width: 120px;"><label>Buffer:</label></th>';
-						$htmlShareButtonsForm .= '<td>';
-						$htmlShareButtonsForm .= '<input id="ssba_custom_buffer" type="text" size="50" name="ssba_custom_buffer" value="' . (isset($arrSettings['ssba_custom_buffer']) ? $arrSettings['ssba_custom_buffer'] : NULL)  . '" />';
-						$htmlShareButtonsForm .= '<input id="upload_buffer_button" data-ssba-input="ssba_custom_buffer" class="button customUpload" type="button" value="Upload Image" />';
-						$htmlShareButtonsForm .= '</td>';
-					$htmlShareButtonsForm .= '</tr>';
-					$htmlShareButtonsForm .= '<tr valign="top">';
-						$htmlShareButtonsForm .= '<th scope="row" style="width: 120px;"><label>Diggit:</label></th>';
-						$htmlShareButtonsForm .= '<td>';
-						$htmlShareButtonsForm .= '<input id="ssba_custom_diggit" type="text" size="50" name="ssba_custom_diggit" value="' . (isset($arrSettings['ssba_custom_diggit']) ? $arrSettings['ssba_custom_diggit'] : NULL)  . '" />';
-						$htmlShareButtonsForm .= '<input id="upload_diggit_button" data-ssba-input="ssba_custom_diggit" class="button customUpload" type="button" value="Upload Image" />';
-						$htmlShareButtonsForm .= '</td>';
-					$htmlShareButtonsForm .= '</tr>';
-					$htmlShareButtonsForm .= '<tr valign="top">';
-						$htmlShareButtonsForm .= '<th scope="row" style="width: 120px;"><label>Email:</label></th>';
-						$htmlShareButtonsForm .= '<td>';
-						$htmlShareButtonsForm .= '<input id="ssba_custom_email" type="text" size="50" name="ssba_custom_email" value="' . (isset($arrSettings['ssba_custom_email']) ? $arrSettings['ssba_custom_email'] : NULL)  . '" />';
-						$htmlShareButtonsForm .= '<input id="upload_email_button" data-ssba-input="ssba_custom_email" class="button customUpload" type="button" value="Upload Image" />';
-						$htmlShareButtonsForm .= '</td>';
-					$htmlShareButtonsForm .= '</tr>';
-					$htmlShareButtonsForm .= '<tr valign="top">';
-						$htmlShareButtonsForm .= '<th scope="row" style="width: 120px;"><label>Facebook:</label></th>';
-						$htmlShareButtonsForm .= '<td>';
-						$htmlShareButtonsForm .= '<input id="ssba_custom_facebook" type="text" size="50" name="ssba_custom_facebook" value="' . (isset($arrSettings['ssba_custom_facebook']) ? $arrSettings['ssba_custom_facebook'] : NULL)  . '" />';
-						$htmlShareButtonsForm .= '<input id="upload_facebook_button" data-ssba-input="ssba_custom_facebook" class="button customUpload" type="button" value="Upload Image" />';
-						$htmlShareButtonsForm .= '</td>';
-					$htmlShareButtonsForm .= '</tr>';
-					$htmlShareButtonsForm .= '<tr valign="top">';
-						$htmlShareButtonsForm .= '<th scope="row" style="width: 120px;"><label>Flattr:</label></th>';
-						$htmlShareButtonsForm .= '<td>';
-						$htmlShareButtonsForm .= '<input id="ssba_custom_flattr" type="text" size="50" name="ssba_custom_flattr" value="' . (isset($arrSettings['ssba_custom_flattr']) ? $arrSettings['ssba_custom_flattr'] : NULL)  . '" />';
-						$htmlShareButtonsForm .= '<input id="upload_flattr_button" data-ssba-input="ssba_custom_flattr" class="button customUpload" type="button" value="Upload Image" />';
-						$htmlShareButtonsForm .= '</td>';
-					$htmlShareButtonsForm .= '</tr>';
-					$htmlShareButtonsForm .= '<tr valign="top">';
-						$htmlShareButtonsForm .= '<th scope="row" style="width: 120px;"><label>Google:</label></th>';
-						$htmlShareButtonsForm .= '<td>';
-						$htmlShareButtonsForm .= '<input id="ssba_custom_google" type="text" size="50" name="ssba_custom_google" value="' . (isset($arrSettings['ssba_custom_google']) ? $arrSettings['ssba_custom_google'] : NULL)  . '" />';
-						$htmlShareButtonsForm .= '<input id="upload_google_button" data-ssba-input="ssba_custom_google" class="button customUpload" type="button" value="Upload Image" />';
-						$htmlShareButtonsForm .= '</td>';
-					$htmlShareButtonsForm .= '</tr>';
-					$htmlShareButtonsForm .= '<tr valign="top">';
-						$htmlShareButtonsForm .= '<th scope="row" style="width: 120px;"><label>LinkedIn:</label></th>';
-						$htmlShareButtonsForm .= '<td>';
-						$htmlShareButtonsForm .= '<input id="ssba_custom_linkedin" type="text" size="50" name="ssba_custom_linkedin" value="' . (isset($arrSettings['ssba_custom_linkedin']) ? $arrSettings['ssba_custom_linkedin'] : NULL)  . '" />';
-						$htmlShareButtonsForm .= '<input id="upload_linkedin_button" data-ssba-input="ssba_custom_linkedin" class="button customUpload" type="button" value="Upload Image" />';
-						$htmlShareButtonsForm .= '</td>';
-					$htmlShareButtonsForm .= '</tr>';
-					$htmlShareButtonsForm .= '<tr valign="top">';
-						$htmlShareButtonsForm .= '<th scope="row" style="width: 120px;"><label>Pinterest:</label></th>';
-						$htmlShareButtonsForm .= '<td>';
-						$htmlShareButtonsForm .= '<input id="ssba_custom_pinterest" type="text" size="50" name="ssba_custom_pinterest" value="' . (isset($arrSettings['ssba_custom_pinterest']) ? $arrSettings['ssba_custom_pinterest'] : NULL)  . '" />';
-						$htmlShareButtonsForm .= '<input id="upload_pinterest_button" data-ssba-input="ssba_custom_pinterest" class="button customUpload" type="button" value="Upload Image" />';
-						$htmlShareButtonsForm .= '</td>';
-					$htmlShareButtonsForm .= '</tr>';
-					$htmlShareButtonsForm .= '<tr valign="top">';
-						$htmlShareButtonsForm .= '<th scope="row" style="width: 120px;"><label>Print:</label></th>';
-						$htmlShareButtonsForm .= '<td>';
-						$htmlShareButtonsForm .= '<input id="ssba_custom_print" type="text" size="50" name="ssba_custom_print" value="' . (isset($arrSettings['ssba_custom_print']) ? $arrSettings['ssba_custom_print'] : NULL)  . '" />';
-						$htmlShareButtonsForm .= '<input id="upload_print_button" data-ssba-input="ssba_custom_print" class="button customUpload" type="button" value="Upload Image" />';
-						$htmlShareButtonsForm .= '</td>';
-					$htmlShareButtonsForm .= '</tr>';
-					$htmlShareButtonsForm .= '<tr valign="top">';
-						$htmlShareButtonsForm .= '<th scope="row" style="width: 120px;"><label>Reddit:</label></th>';
-						$htmlShareButtonsForm .= '<td>';
-						$htmlShareButtonsForm .= '<input id="ssba_custom_reddit" type="text" size="50" name="ssba_custom_reddit" value="' . (isset($arrSettings['ssba_custom_reddit']) ? $arrSettings['ssba_custom_reddit'] : NULL)  . '" />';
-						$htmlShareButtonsForm .= '<input id="upload_reddit_button" data-ssba-input="ssba_custom_reddit" class="button customUpload" type="button" value="Upload Image" />';
-						$htmlShareButtonsForm .= '</td>';
-					$htmlShareButtonsForm .= '</tr>';
-					$htmlShareButtonsForm .= '<tr valign="top">';
-						$htmlShareButtonsForm .= '<th scope="row" style="width: 120px;"><label>StumbleUpon:</label></th>';
-						$htmlShareButtonsForm .= '<td>';
-						$htmlShareButtonsForm .= '<input id="ssba_custom_stumbleupon" type="text" size="50" name="ssba_custom_stumbleupon" value="' . (isset($arrSettings['ssba_custom_stumbleupon']) ? $arrSettings['ssba_custom_stumbleupon'] : NULL)  . '" />';
-						$htmlShareButtonsForm .= '<input id="upload_stumbleupon_button" data-ssba-input="ssba_custom_stumbleupon" class="button customUpload" type="button" value="Upload Image" />';
-						$htmlShareButtonsForm .= '</td>';
-					$htmlShareButtonsForm .= '</tr>';
-					$htmlShareButtonsForm .= '<tr valign="top">';
-						$htmlShareButtonsForm .= '<th scope="row" style="width: 120px;"><label>Tumblr:</label></th>';
-						$htmlShareButtonsForm .= '<td>';
-						$htmlShareButtonsForm .= '<input id="ssba_custom_tumblr" type="text" size="50" name="ssba_custom_tumblr" value="' . (isset($arrSettings['ssba_custom_tumblr']) ? $arrSettings['ssba_custom_tumblr'] : NULL)  . '" />';
-						$htmlShareButtonsForm .= '<input id="upload_tumblr_button" data-ssba-input="ssba_custom_tumblr" class="button customUpload" type="button" value="Upload Image" />';
-						$htmlShareButtonsForm .= '</td>';
-					$htmlShareButtonsForm .= '</tr>';
-					$htmlShareButtonsForm .= '<tr valign="top">';
-						$htmlShareButtonsForm .= '<th scope="row" style="width: 120px;"><label>Twitter:</label></th>';
-						$htmlShareButtonsForm .= '<td>';
-						$htmlShareButtonsForm .= '<input id="ssba_custom_twitter" type="text" size="50" name="ssba_custom_twitter" value="' . (isset($arrSettings['ssba_custom_twitter']) ? $arrSettings['ssba_custom_twitter'] : NULL)  . '" />';
-						$htmlShareButtonsForm .= '<input id="upload_twitter_button" data-ssba-input="ssba_custom_twitter" class="button customUpload" type="button" value="Upload Image" />';
-						$htmlShareButtonsForm .= '<p class="description">Enter the URLs of your images or upload from here.<br/>Simply leave any blank you do not wish to include.</p></td>';
-					$htmlShareButtonsForm .= '</tr>';
+                                        // ---------- Buffer -------- //
+                                        $htmlShareButtonsForm .= ssba_generate_input("buffer", "Buffer");
+                                        $htmlShareButtonsForm .= ssba_generate_input("buffer_hover", "Buffer Hover");
+					
+                                        // ---------- Diggit -------- //    
+                                        $htmlShareButtonsForm .= ssba_generate_input("diggit", "Diggit");
+                                        $htmlShareButtonsForm .= ssba_generate_input("diggit_hover", "Diggit Hover");
+
+                                        // ---------- Reddit -------- //
+                                        $htmlShareButtonsForm .= ssba_generate_input("reddit", "Reddit");
+                                        $htmlShareButtonsForm .= ssba_generate_input("reddit_hover", "Reddit Hover");
+                                        
+                                        // ---------- StumbleUpon -------- //
+                                        $htmlShareButtonsForm .= ssba_generate_input("stumbleupon", "StumbleUpon");
+                                        $htmlShareButtonsForm .= ssba_generate_input("stumbleupon_hover", "StumbleUpon Hover");
+                                        
+					// ---------- Tumblr -------- //
+                                        $htmlShareButtonsForm .= ssba_generate_input("tumblr", "Tumblr");
+                                        $htmlShareButtonsForm .= ssba_generate_input("tumblr_hover", "Tumblr Hover");
+					
+                                        // ---------- Twitter -------- //
+                                        $htmlShareButtonsForm .= ssba_generate_input("twitter", "Twitter");
+                                        $htmlShareButtonsForm .= ssba_generate_input("twitter_hover", "Twitter Hover");
+                                        
+					// ---------- Facebook -------- //
+                                        $htmlShareButtonsForm .= ssba_generate_input("facebook", "Facebook");
+                                        $htmlShareButtonsForm .= ssba_generate_input("facebook_hover", "Facebook Hover");
+                                        
+                                        // ---------- Flattr -------- //
+                                        $htmlShareButtonsForm .= ssba_generate_input("flattr", "Flattr");
+                                        $htmlShareButtonsForm .= ssba_generate_input("flattr_hover", "Flattr Hover");
+                                        
+                                        // ---------- Google -------- //
+                                        $htmlShareButtonsForm .= ssba_generate_input("google", "Google");
+                                        $htmlShareButtonsForm .= ssba_generate_input("google_hover", "Google Hover");
+                                        
+                                        // ---------- LinkedIn -------- //
+                                        $htmlShareButtonsForm .= ssba_generate_input("linkedin", "LinkedIn");
+                                        $htmlShareButtonsForm .= ssba_generate_input("linkedin_hover", "LinkedIn Hover");
+					
+                                        // ---------- Pinterest -------- //
+                                        $htmlShareButtonsForm .= ssba_generate_input("pinterest", "Pinterest");
+                                        $htmlShareButtonsForm .= ssba_generate_input("pinterest_hover", "Pinterest Hover");
+					
+                                        // ---------- Email -------- //
+                                        $htmlShareButtonsForm .= ssba_generate_input("email", "Email");
+                                        $htmlShareButtonsForm .= ssba_generate_input("email_hover", "Email Hover");
+                                        
+					// ---------- Print -------- //
+                                        $htmlShareButtonsForm .= ssba_generate_input("print", "Print");
+                                        $htmlShareButtonsForm .= ssba_generate_input("print_hover", "Print Hover");
+					
 				$htmlShareButtonsForm .= '</table>';
 				$htmlShareButtonsForm .= '</div>';
 				
