@@ -1,6 +1,5 @@
 ﻿jQuery(document).ready(function() {
-	console.log("Firing docready");
-	console.log(jQuery('.customUpload'));
+
 	//------- INCLUDE LIST ----------//
 
 	// add drag and sort functions to include table
