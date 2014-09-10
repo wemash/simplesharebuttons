@@ -22,7 +22,7 @@ function ssba_admin_panel($arrSettings, $htmlSettingsSaved) {
 	
 		//logo
 		$htmlShareButtonsForm .= '<div id="ssba-logo">';
-			$htmlShareButtonsForm .= '<a href="http://www.simplesharebuttons.com" target="_blank"><img src="' . plugins_url() . '/simple-share-buttons-adder/images/simplesharebuttons.png' . '" class="ssba-logo-img" /></a>';
+			$htmlShareButtonsForm .= '<a href="http://www.simplesharebuttons.com" target="_blank"><img src="'. plugins_url("../images", __FILE__) . 'simplesharebuttons.png' . '" class="ssba-logo-img" /></a>';
 		$htmlShareButtonsForm .= '</div>';
 		
 		// top nav
@@ -532,7 +532,7 @@ CODE;
 										<div class="author-shortcodes">
 											<div class="author-inner">
 												<div class="author-image">
-													<img src="' . plugins_url() . '/simple-share-buttons-adder/images/david.png" style="float: left; margin-right: 10px;" alt="">
+													<img src="'. plugins_url("../images", __FILE__) . '/david.png" style="float: left; margin-right: 10px;" alt="">
 													<div class="author-overlay"></div>
 												</div> <!-- .author-image --> 
 												<div class="author-info">
@@ -562,7 +562,7 @@ CODE;
 									</table>
 									<table class="centerme">
 										<tr>
-											<td><a href="http://wordpress.org/support/view/plugin-reviews/simple-share-buttons-adder" target="_blank" title="Rate 5 Star">Rate the plugin<br/><img src="' . plugins_url() . '/simple-share-buttons-adder/images/stars.png"></a></br></td>
+											<td><a href="http://wordpress.org/support/view/plugin-reviews/simple-share-buttons-adder" target="_blank" title="Rate 5 Star">Rate the plugin<br/><img src="' . plugins_url("../images", __FILE__) . '/stars.png"></a></br></td>
 										</tr>
 									</table>
 									<div class="et-box et-bio centerme">
