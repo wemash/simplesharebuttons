@@ -530,29 +530,27 @@ GNU General Public License for more details.
                     
                             // use set options
                             $htmlSSBAStyle .= '	.ssba {
-                                                                                    ' . ($arrSettings['ssba_div_padding'] 			!= ''	? 'padding: ' 	. $arrSettings['ssba_div_padding'] . 'px;' : NULL) . '
-                                                                                    ' . ($arrSettings['ssba_border_width'] 			!= ''	? 'border: ' . $arrSettings['ssba_border_width'] . 'px solid ' 	. $arrSettings['ssba_div_border'] . ';' : NULL) . '
-                                                                                    ' . ($arrSettings['ssba_div_background'] 		!= ''	? 'background-color: ' 	. $arrSettings['ssba_div_background'] . ';' : NULL) . '
-                                                                                    ' . ($arrSettings['ssba_div_rounded_corners'] 	== 'Y'	? '-moz-border-radius: 10px; -webkit-border-radius: 10px; -khtml-border-radius: 10px;  border-radius: 10px; -o-border-radius: 10px;' : NULL) . '
-                                                                            }
-                                                                            .ssba img		
-                                                                            { 	
-                                                                                    width: ' . $arrSettings['ssba_size'] . 'px !important;
-                                                                                    padding: ' . $arrSettings['ssba_padding'] . 'px;
-                                                                                    border:  0;
-                                                                                    box-shadow: none !important;
-                                                                                    display: inline !important;
-                                                                                    vertical-align: middle;
-                                                                            }
-                                                                            .ssba, .ssba a		
-                                                                            {
-                                                                                    text-decoration:none;
-                                                                                    ' . ($arrSettings['ssba_div_background'] == ''	? 'background: none;' : NULL) . '
-                                                                                    ' . ($arrSettings['ssba_font_family'] 	!= ''	? 'font-family: ' . $arrSettings['ssba_font_family'] . ';' : NULL) . '
-                                                                                    ' . ($arrSettings['ssba_font_size']		!= ''	? 'font-size: 	' . $arrSettings['ssba_font_size'] . 'px;' : NULL) . '
-                                                                                    ' . ($arrSettings['ssba_font_color'] 	!= ''	? 'color: 		' . $arrSettings['ssba_font_color'] . '!important;' : NULL) . '
-                                                                                    ' . ($arrSettings['ssba_font_weight'] 	!= ''	? 'font-weight: ' . $arrSettings['ssba_font_weight'] . ';' : NULL) . '
-                                                                            }';
+                                                        ' . ($arrSettings['ssba_div_padding'] 			!= ''	? 'padding: ' 	. $arrSettings['ssba_div_padding'] . 'px;' : NULL) . '
+                                                        ' . ($arrSettings['ssba_border_width'] 			!= ''	? 'border: ' . $arrSettings['ssba_border_width'] . 'px solid ' 	. $arrSettings['ssba_div_border'] . ';' : NULL) . '
+                                                        ' . ($arrSettings['ssba_div_background'] 		!= ''	? 'background-color: ' 	. $arrSettings['ssba_div_background'] . ';' : NULL) . '
+                                                        ' . ($arrSettings['ssba_div_rounded_corners'] 	== 'Y'	? '-moz-border-radius: 10px; -webkit-border-radius: 10px; -khtml-border-radius: 10px;  border-radius: 10px; -o-border-radius: 10px;' : NULL) . '
+                                                         display:inline-block;
+                                                }
+                                                .ssba, .ssba a		
+                                                {
+                                                        text-decoration:none;
+                                                        ' . ($arrSettings['ssba_div_background'] == ''	? 'background: none;' : NULL) . '
+                                                        ' . ($arrSettings['ssba_font_family'] 	!= ''	? 'font-family: ' . $arrSettings['ssba_font_family'] . ';' : NULL) . '
+                                                        ' . ($arrSettings['ssba_font_size']		!= ''	? 'font-size: 	' . $arrSettings['ssba_font_size'] . 'px;' : NULL) . '
+                                                        ' . ($arrSettings['ssba_font_color'] 	!= ''	? 'color: 		' . $arrSettings['ssba_font_color'] . '!important;' : NULL) . '
+                                                        ' . ($arrSettings['ssba_font_weight'] 	!= ''	? 'font-weight: ' . $arrSettings['ssba_font_weight'] . ';' : NULL) . '
+                                                }
+                                                .ssba a {
+                                                    height: 50px;
+                                                    width: 50px;
+                                                    display: inline-block;
+                                                    background-repeat:no-repeat;
+                                                }';
                     }
                     
                     // else use set options
@@ -925,11 +923,11 @@ function ssba_generate_service_style($service, $id, $arrSettings){
         $htmlShareStyle .= 'background-image:url("'.WP_PLUGIN_URL . '/simple-share-buttons-adder/buttons/' . $arrSettings['ssba_image_set'] . '/'.$service.'.png");';
         $htmlShareStyle .= "}";
     }else {
-        $htmlShareStyle .= "background-image:".$arrSettings['ssba_custom_'.$service].";";
+        $htmlShareStyle .= 'background-image:url("'.$arrSettings['ssba_custom_'.$service].'");';
         $htmlShareStyle .= "}";
         if(isset($arrSettings['ssba_custom_'.$service.'_hover'])){
-            $htmlShareStyle .= '#'.$rndid . ':hover {';
-            $htmlShareStyle .= "background-image:".$arrSettings['ssba_custom_'.$service.'_hover'].";";
+            $htmlShareStyle .= '#'.$id . ':hover {';
+            $htmlShareStyle .= 'background-image:url("'.$arrSettings['ssba_custom_'.$service.'_hover'].'");';
             $htmlShareStyle .= "}";
         }
     }
@@ -990,7 +988,7 @@ function ssba_twitter($arrSettings, $urlCurrentPage, $strPageTitle, $booShowShar
 	}
 	
 	// return share buttons
-	return $htmlShareButtons;
+	return $htmlShareStyle.$htmlShareButtons;
 }
 
 // get twitter share count
