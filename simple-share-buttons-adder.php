@@ -1,10 +1,8 @@
 <?php
 /*
- Plugin Name: Simple Share Links
+Plugin Name: Simple Share Buttons Adder
 Plugin URI: 
-Description: Re-write of Simple Share Buttons Adder by David S Neal. A simple plugin that enables you to add share buttons to all of your posts and/or pages.
-Version: 1.0
-Author: Steven T Chennault
+Description: Fork of Simple Share Buttons Adder by David S Neal. A simple plugin that enables you to add share buttons to all of your posts and/or pages.
 
  
 Original Plugin Name: Simple Share Buttons Adder
