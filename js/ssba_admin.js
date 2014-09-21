@@ -110,9 +110,12 @@
 	}); 
 	
 	// color picker
-	jQuery('#ssba_font_color').wpColorPicker();
-	jQuery('#ssba_div_border').wpColorPicker();
-	jQuery('#ssba_div_background').wpColorPicker();
+	/**
+	 * This is temporarily disabled to get the plugin to work on wp 3.1.2
+	 */
+	//jQuery('#ssba_font_color').wpColorPicker();
+	//jQuery('#ssba_div_border').wpColorPicker();
+	//jQuery('#ssba_div_background').wpColorPicker();
 	
 	// when custom style button is clicked
 	jQuery('#ssba_button_custom_styles').click(function(){
