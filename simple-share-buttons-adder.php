@@ -923,7 +923,7 @@ function ssba_generate_service_style($service, $id, $arrSettings){
     }else {
         $htmlShareStyle .= 'background-image:url("'.$arrSettings['ssba_custom_'.$service].'");';
         $htmlShareStyle .= "}";
-        if(isset($arrSettings['ssba_custom_'.$service.'_hover'])){
+        if(isset($arrSettings['ssba_custom_'.$service.'_hover']) && !empty($arrSettings['ssba_custom_'.$service.'_hover'])){
             $htmlShareStyle .= '#'.$id . ':hover {';
             $htmlShareStyle .= 'background-image:url("'.$arrSettings['ssba_custom_'.$service.'_hover'].'");';
             $htmlShareStyle .= "}";
