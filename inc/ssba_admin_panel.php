@@ -1,10 +1,10 @@
 ﻿<?php
 
-function ssba_generate_input($social, $socialFriendly){
-    $htmlShareRow .= '<tr valign="top">';
+function ssba_generate_input($social, $socialFriendly, $arrSettings){
+    $htmlShareRow = '<tr valign="top">';
             $htmlShareRow .= '<th scope="row" style="width: 120px;"><label>'.$socialFriendly.':</label></th>';
             $htmlShareRow .= '<td>';
-            $htmlShareRow .= '<input id="ssba_custom_'.$social.'" type="text" size="50" name="ssba_custom_'.$social.'" value="' . (isset($arrSettings['ssba_custom'.$social]) ? $arrSettings['ssba_custom_'.$social] : NULL)  . '" />';
+            $htmlShareRow .= '<input id="ssba_custom_'.$social.'" type="text" size="50" name="ssba_custom_'.$social.'" value="' . (isset($arrSettings['ssba_custom_'.$social]) ? $arrSettings['ssba_custom_'.$social] : NULL)  . '" />';
             $htmlShareRow .= '<input id="upload_'.$social.'_button" data-ssba-input="ssba_custom_'.$social.'" class="button customUpload" type="button" value="Upload Image" />';
             $htmlShareRow .= '</td>';
     $htmlShareRow .= '</tr>';
@@ -22,7 +22,8 @@ function ssba_admin_panel($arrSettings, $htmlSettingsSaved) {
 	
 		//logo
 		$htmlShareButtonsForm .= '<div id="ssba-logo">';
-			$htmlShareButtonsForm .= '<a href="http://www.simplesharebuttons.com" target="_blank"><img src="'. plugins_url("../images", __FILE__) . 'simplesharebuttons.png' . '" class="ssba-logo-img" /></a>';
+			
+			//$htmlShareButtonsForm .= '<a href="http://www.simplesharebuttons.com" target="_blank"><img src="'. plugins_url("../images/simplesharebuttons.png", __FILE__). '" class="ssba-logo-img" /></a>';
 		$htmlShareButtonsForm .= '</div>';
 		
 		// top nav
@@ -115,57 +116,59 @@ function ssba_admin_panel($arrSettings, $htmlSettingsSaved) {
 				$htmlShareButtonsForm .= '<div id="ssba-custom-images"' . ($arrSettings['ssba_image_set'] != 'custom' ? 'style="display: none;"' : NULL) . '>';
 				$htmlShareButtonsForm .= '<h4>Custom Images</h4>';
 				$htmlShareButtonsForm .= '<table class="form-table">';
-                                        // ---------- Buffer -------- //
-                                        $htmlShareButtonsForm .= ssba_generate_input("buffer", "Buffer");
-                                        $htmlShareButtonsForm .= ssba_generate_input("buffer_hover", "Buffer Hover");
+					// -- Most Popular -- //
+					
+					// ---------- Facebook -------- //
+                                        $htmlShareButtonsForm .= ssba_generate_input("facebook", "Facebook", $arrSettings);
+                                        $htmlShareButtonsForm .= ssba_generate_input("facebook_hover", "Facebook Hover", $arrSettings);
+					
+					// ---------- Google -------- //
+                                        $htmlShareButtonsForm .= ssba_generate_input("google", "Google", $arrSettings);
+                                        $htmlShareButtonsForm .= ssba_generate_input("google_hover", "Google Hover", $arrSettings);
+					
+					// ---------- Twitter -------- //
+                                        $htmlShareButtonsForm .= ssba_generate_input("twitter", "Twitter", $arrSettings);
+                                        $htmlShareButtonsForm .= ssba_generate_input("twitter_hover", "Twitter Hover", $arrSettings);
+					
+					// ---------- Tumblr -------- //
+                                        $htmlShareButtonsForm .= ssba_generate_input("tumblr", "Tumblr", $arrSettings);
+                                        $htmlShareButtonsForm .= ssba_generate_input("tumblr_hover", "Tumblr Hover", $arrSettings);
+                                        
+					// ---------- Buffer -------- //
+                                        $htmlShareButtonsForm .= ssba_generate_input("buffer", "Buffer", $arrSettings);
+                                        $htmlShareButtonsForm .= ssba_generate_input("buffer_hover", "Buffer Hover", $arrSettings);
 					
                                         // ---------- Diggit -------- //    
-                                        $htmlShareButtonsForm .= ssba_generate_input("diggit", "Diggit");
-                                        $htmlShareButtonsForm .= ssba_generate_input("diggit_hover", "Diggit Hover");
+                                        $htmlShareButtonsForm .= ssba_generate_input("diggit", "Diggit", $arrSettings);
+                                        $htmlShareButtonsForm .= ssba_generate_input("diggit_hover", "Diggit Hover", $arrSettings);
 
                                         // ---------- Reddit -------- //
-                                        $htmlShareButtonsForm .= ssba_generate_input("reddit", "Reddit");
-                                        $htmlShareButtonsForm .= ssba_generate_input("reddit_hover", "Reddit Hover");
+                                        $htmlShareButtonsForm .= ssba_generate_input("reddit", "Reddit", $arrSettings);
+                                        $htmlShareButtonsForm .= ssba_generate_input("reddit_hover", "Reddit Hover", $arrSettings);
                                         
                                         // ---------- StumbleUpon -------- //
-                                        $htmlShareButtonsForm .= ssba_generate_input("stumbleupon", "StumbleUpon");
-                                        $htmlShareButtonsForm .= ssba_generate_input("stumbleupon_hover", "StumbleUpon Hover");
-                                        
-					// ---------- Tumblr -------- //
-                                        $htmlShareButtonsForm .= ssba_generate_input("tumblr", "Tumblr");
-                                        $htmlShareButtonsForm .= ssba_generate_input("tumblr_hover", "Tumblr Hover");
-					
-                                        // ---------- Twitter -------- //
-                                        $htmlShareButtonsForm .= ssba_generate_input("twitter", "Twitter");
-                                        $htmlShareButtonsForm .= ssba_generate_input("twitter_hover", "Twitter Hover");
-                                        
-					// ---------- Facebook -------- //
-                                        $htmlShareButtonsForm .= ssba_generate_input("facebook", "Facebook");
-                                        $htmlShareButtonsForm .= ssba_generate_input("facebook_hover", "Facebook Hover");
+                                        $htmlShareButtonsForm .= ssba_generate_input("stumbleupon", "StumbleUpon", $arrSettings);
+                                        $htmlShareButtonsForm .= ssba_generate_input("stumbleupon_hover", "StumbleUpon Hover", $arrSettings);
                                         
                                         // ---------- Flattr -------- //
-                                        $htmlShareButtonsForm .= ssba_generate_input("flattr", "Flattr");
-                                        $htmlShareButtonsForm .= ssba_generate_input("flattr_hover", "Flattr Hover");
-                                        
-                                        // ---------- Google -------- //
-                                        $htmlShareButtonsForm .= ssba_generate_input("google", "Google");
-                                        $htmlShareButtonsForm .= ssba_generate_input("google_hover", "Google Hover");
+                                        $htmlShareButtonsForm .= ssba_generate_input("flattr", "Flattr", $arrSettings);
+                                        $htmlShareButtonsForm .= ssba_generate_input("flattr_hover", "Flattr Hover", $arrSettings);
                                         
                                         // ---------- LinkedIn -------- //
-                                        $htmlShareButtonsForm .= ssba_generate_input("linkedin", "LinkedIn");
-                                        $htmlShareButtonsForm .= ssba_generate_input("linkedin_hover", "LinkedIn Hover");
+                                        $htmlShareButtonsForm .= ssba_generate_input("linkedin", "LinkedIn", $arrSettings);
+                                        $htmlShareButtonsForm .= ssba_generate_input("linkedin_hover", "LinkedIn Hover", $arrSettings);
 					
                                         // ---------- Pinterest -------- //
-                                        $htmlShareButtonsForm .= ssba_generate_input("pinterest", "Pinterest");
-                                        $htmlShareButtonsForm .= ssba_generate_input("pinterest_hover", "Pinterest Hover");
+                                        $htmlShareButtonsForm .= ssba_generate_input("pinterest", "Pinterest", $arrSettings);
+                                        $htmlShareButtonsForm .= ssba_generate_input("pinterest_hover", "Pinterest Hover", $arrSettings);
 					
                                         // ---------- Email -------- //
-                                        $htmlShareButtonsForm .= ssba_generate_input("email", "Email");
-                                        $htmlShareButtonsForm .= ssba_generate_input("email_hover", "Email Hover");
+                                        $htmlShareButtonsForm .= ssba_generate_input("email", "Email", $arrSettings);
+                                        $htmlShareButtonsForm .= ssba_generate_input("email_hover", "Email Hover", $arrSettings);
                                         
 					// ---------- Print -------- //
-                                        $htmlShareButtonsForm .= ssba_generate_input("print", "Print");
-                                        $htmlShareButtonsForm .= ssba_generate_input("print_hover", "Print Hover");
+                                        $htmlShareButtonsForm .= ssba_generate_input("print", "Print", $arrSettings);
+                                        $htmlShareButtonsForm .= ssba_generate_input("print_hover", "Print Hover", $arrSettings);
 					
 				$htmlShareButtonsForm .= '</table>';
 				$htmlShareButtonsForm .= '</div>';
@@ -324,25 +327,27 @@ function ssba_admin_panel($arrSettings, $htmlSettingsSaved) {
 						$htmlShareButtonsForm .= '<th scope="row" style="width: 120px;"><label for="ssba_custom_styles">Custom CSS:&nbsp;</label></th>';
 						$htmlShareButtonsForm .= '<td>';
 						$htmlShareButtonsForm .= '<textarea name="ssba_custom_styles" id="ssba_custom_styles" rows="20" cols="50">' . $arrSettings['ssba_custom_styles'] . '</textarea>';
+						$htmlShareButtonsForm .= '<th scope="row" style="width: 120px;"><label for="ssba_custom_styles">Default CSS:&nbsp;</label></th>';
 						$htmlShareButtonsForm .= '<td>';
+						$htmlShareButtonsForm .= '<textarea rows="20" cols="50">';
 							$htmlShareButtonsForm .= <<<CODE
-													<h3>Default CSS</h3>
-													.ssba img</br>	
-													{ 	</br>
-														width: 35px;</br>
-														padding: 6px;</br>
-														border:  0;</br>
-														box-shadow: none !important;</br>
-														display: inline;</br>
-														vertical-align: middle;</br>
-													}</br></br>
-													.ssba, .ssba a		</br>
-													{</br>
-														font-family: Indie Flower;</br>
-														font-size: 	20px;</br>
-														text-decoration: none;</br>
-													}
+.ssba img	
+{ 	
+	width: 35px;
+	padding: 6px;
+	border:  0;
+	box-shadow: none !important;
+	display: inline;
+	vertical-align: middle;
+}
+.ssba, .ssba a		
+{
+	font-family: Indie Flower;
+	font-size: 	20px;
+	text-decoration: none;
+}
 CODE;
+						$htmlShareButtonsForm .= '</textarea>';
 						$htmlShareButtonsForm .= '</td>';
 					$htmlShareButtonsForm .= '<tr>';
 						$htmlShareButtonsForm .= '<td>';
@@ -406,46 +411,49 @@ CODE;
 						$htmlShareButtonsForm .= '<th scope="row" style="width: 120px;"><label for="ssba_share_count_css">Custom CSS:&nbsp;</label></th>';
 						$htmlShareButtonsForm .= '<td>';
 						$htmlShareButtonsForm .= '<textarea name="ssba_share_count_css" id="ssba_share_count_css" rows="20" cols="50">' . $arrSettings['ssba_share_count_css'] . '</textarea>';
+						$htmlShareButtonsForm .= '</td>';
+						$htmlShareButtonsForm .= '<th scope="row" style="width: 120px;"><label for="ssba_share_count_css">Default CSS:&nbsp;</label></th>';
 						$htmlShareButtonsForm .= '<td>';
-							$htmlShareButtonsForm .= <<<CODE
-													<h3>Default CSS</h3>
-													.ssba_sharecount:after, .ssba_sharecount:before {</br>
-														right: 100%;</br>
-														border: solid transparent;</br>
-														content: " ";</br>
-														height: 0;</br>
-														width: 0;</br>
-														position: absolute;</br>
-														pointer-events: none;</br>
-													}</br>
-													.ssba_sharecount:after {</br>
-														border-color: rgba(224, 221, 221, 0);</br>
-														border-right-color: #f5f5f5;</br>
-														border-width: 5px;</br>
-														top: 50%;</br>
-														margin-top: -5px;</br>
-													}
-													.ssba_sharecount:before {</br>
-														border-color: rgba(85, 94, 88, 0);</br>
-														border-right-color: #e0dddd;</br>
-														border-width: 6px;</br>
-														top: 50%;</br>
-														margin-top: -6px;</br>
-													}</br>
-													.ssba_sharecount {</br>
-														font: 11px Arial, Helvetica, sans-serif;</br>
-														color: #555e58;</br>
-														padding: 5px;</br>
-														-khtml-border-radius: 6px;</br>
-														-o-border-radius: 6px;</br>
-														-webkit-border-radius: 6px;</br>
-														-moz-border-radius: 6px;</br>
-														border-radius: 6px;</br>
-														position: relative;</br>
-														background: #f5f5f5;</br>
-														border: 1px solid #e0dddd;</br>
-													}
+						$htmlShareButtonsForm .= '<textarea rows="20" cols="50">';
+						$htmlShareButtonsForm .= <<<CODE
+.ssba_sharecount:after, .ssba_sharecount:before {
+	right: 100%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+.ssba_sharecount:after {
+	border-color: rgba(224, 221, 221, 0);
+	border-right-color: #f5f5f5;
+	border-width: 5px;
+	top: 50%;
+	margin-top: -5px;
+}
+.ssba_sharecount:before {
+	border-color: rgba(85, 94, 88, 0);
+	border-right-color: #e0dddd;
+	border-width: 6px;
+	top: 50%;
+	margin-top: -6px;
+}
+.ssba_sharecount {
+	font: 11px Arial, Helvetica, sans-serif;
+	color: #555e58;
+	padding: 5px;
+	-khtml-border-radius: 6px;
+	-o-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	position: relative;
+	background: #f5f5f5;
+	border: 1px solid #e0dddd;
+}
 CODE;
+					    $htmlShareButtonsForm .= "</textarea>";
 						$htmlShareButtonsForm .= '</td>';
 					$htmlShareButtonsForm .= '<tr>';
 						$htmlShareButtonsForm .= '<td>';
@@ -527,60 +535,60 @@ CODE;
 	$htmlShareButtonsForm .= '</td><td style="vertical-align: top;">';	
 	
 	// author div
-	$htmlShareButtonsForm .= '	<div class="ssba-box ssba-shadow">
-									<div class="ssba-box-content">
-										<div class="author-shortcodes">
-											<div class="author-inner">
-												<div class="author-image">
-													<img src="'. plugins_url("../images", __FILE__) . '/david.png" style="float: left; margin-right: 10px;" alt="">
-													<div class="author-overlay"></div>
-												</div> <!-- .author-image --> 
-												<div class="author-info">
-													<a href="http://www.davidsneal.co.uk" target="_blank">David Neal</a> – Married, father of one (another on the way!), with an obsession with websites, coding and gaming. This plugin and its website has been funded by myself.
-												</div> <!-- .author-info -->
-											</div> <!-- .author-inner -->
-										</div> <!-- .author-shortcodes -->
-									</div></br>
-									<table class="centerme">
-										<tr>
-											<td>
-												<a href="http://www.simplesharebuttons.com/plus"><h3>Check out Simple Share Buttons Plus!</h3></a>
-												<h3><a href="#TB_inline?width=600&height=450&inlineId=ssbp-info" class="thickbox">What\'s different?</a></h3>
-												<iframe width="330" height="186" src="//www.youtube.com/embed/SFO9Uss-LuQ?rel=0" frameborder="0" allowfullscreen></iframe>
-											</td>
-										</tr>
-										<tr>
-											<td class="centerme"><form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-<input type="hidden" name="cmd" value="_s-xclick">
-<input type="hidden" name="hosted_button_id" value="75WFUCTYND76Q">
-<input type="image" src="https://www.paypalobjects.com/en_GB/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online.">
-<img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
-</form>
-
-											</td>
-										</tr>
-									</table>
-									<table class="centerme">
-										<tr>
-											<td><a href="http://wordpress.org/support/view/plugin-reviews/simple-share-buttons-adder" target="_blank" title="Rate 5 Star">Rate the plugin<br/><img src="' . plugins_url("../images", __FILE__) . '/stars.png"></a></br></td>
-										</tr>
-									</table>
-									<div class="et-box et-bio centerme">
-										<div class="et-box-content">
-										<p><strong>Visit <a href="http://make.simplesharebuttons.com" target="blank">make.simplesharebuttons.com</a><br/>to make custom-colour buttons</strong></p>
-									</div></div>
-								</div>
-								<div id="ssbp-info" style="display:none;">
-									<div class="ssbp-info centerme">
-										<h1 class="blueme">Simple Share Buttons Plus</h1>
-										 <p class="description">Find out more at <a class="blueme" href="http://www.simplesharebuttons.com/plus">www.simplesharebuttons.com/plus</a></p>
-									     <p class="ssbp-popup">Popup share windows</p>
-									     <p class="ssbp-retina">Retina-ready CSS Sprite</p>
-									     <p class="ssbp-tracking">Built-in tracking</p>
-									     <p class="ssbp-hover">Hover and click effects</p>
-									     <p class="ssbp-vk">VK button added</p>
-									</div>
-								</div>';
+//	$htmlShareButtonsForm .= '	<div class="ssba-box ssba-shadow">
+//									<div class="ssba-box-content">
+//										<div class="author-shortcodes">
+//											<div class="author-inner">
+//												<div class="author-image">
+//													<img src="'. plugins_url("../images", __FILE__) . '/david.png" style="float: left; margin-right: 10px;" alt="">
+//													<div class="author-overlay"></div>
+//												</div> <!-- .author-image --> 
+//												<div class="author-info">
+//													<a href="http://www.davidsneal.co.uk" target="_blank">David Neal</a> – Married, father of one (another on the way!), with an obsession with websites, coding and gaming. This plugin and its website has been funded by myself.
+//												</div> <!-- .author-info -->
+//											</div> <!-- .author-inner -->
+//										</div> <!-- .author-shortcodes -->
+//									</div></br>
+//									<table class="centerme">
+//										<tr>
+//											<td>
+//												<a href="http://www.simplesharebuttons.com/plus"><h3>Check out Simple Share Buttons Plus!</h3></a>
+//												<h3><a href="#TB_inline?width=600&height=450&inlineId=ssbp-info" class="thickbox">What\'s different?</a></h3>
+//												<iframe width="330" height="186" src="//www.youtube.com/embed/SFO9Uss-LuQ?rel=0" frameborder="0" allowfullscreen></iframe>
+//											</td>
+//										</tr>
+//										<tr>
+//											<td class="centerme"><form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+//<input type="hidden" name="cmd" value="_s-xclick">
+//<input type="hidden" name="hosted_button_id" value="75WFUCTYND76Q">
+//<input type="image" src="https://www.paypalobjects.com/en_GB/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal – The safer, easier way to pay online.">
+//<img alt="" border="0" src="https://www.paypalobjects.com/en_GB/i/scr/pixel.gif" width="1" height="1">
+//</form>
+//
+//											</td>
+//										</tr>
+//									</table>
+//									<table class="centerme">
+//										<tr>
+//											<td><a href="http://wordpress.org/support/view/plugin-reviews/simple-share-buttons-adder" target="_blank" title="Rate 5 Star">Rate the plugin<br/><img src="' . plugins_url("../images", __FILE__) . '/stars.png"></a></br></td>
+//										</tr>
+//									</table>
+//									<div class="et-box et-bio centerme">
+//										<div class="et-box-content">
+//										<p><strong>Visit <a href="http://make.simplesharebuttons.com" target="blank">make.simplesharebuttons.com</a><br/>to make custom-colour buttons</strong></p>
+//									</div></div>
+//								</div>
+		$htmlShareButtonsForm .= '		<div id="ssbp-info" style="display:none;">
+							    <div class="ssbp-info centerme">
+									<h1 class="blueme">Simple Share Buttons Plus</h1>
+									 <p class="description">Find out more at <a class="blueme" href="http://www.simplesharebuttons.com/plus">www.simplesharebuttons.com/plus</a></p>
+								     <p class="ssbp-popup">Popup share windows</p>
+								     <p class="ssbp-retina">Retina-ready CSS Sprite</p>
+								     <p class="ssbp-tracking">Built-in tracking</p>
+								     <p class="ssbp-hover">Hover and click effects</p>
+								     <p class="ssbp-vk">VK button added</p>
+							    </div>
+						    </div>';
 
 	// close author cell and close table
 	$htmlShareButtonsForm .= '</td></tr></table>';							
