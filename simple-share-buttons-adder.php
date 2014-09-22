@@ -335,18 +335,17 @@ GNU General Public License for more details.
             //if (is_page() && $arrSettings['ssba_pages'] == 'Y' || is_single() && $arrSettings['ssba_posts'] == 'Y' || is_category() && $arrSettings['ssba_cats_archs'] == 'Y' || is_archive() && $arrSettings['ssba_cats_archs'] == 'Y' || is_home() && $arrSettings['ssba_homepage'] == 'Y' || $booShortCode == TRUE) { 
             
                     // if reenie beenie font or Indie Flower is selected
-                    if ($arrSettings['ssba_font_family'] == 'Indie Flower') {
-            
-                            // font scripts 
-                            wp_register_style('ssbaFont', '//fonts.googleapis.com/css?family=Indie+Flower');
-                            wp_enqueue_style( 'ssbaFont');
-                    } else if ($arrSettings['ssba_font_family'] == 'Reenie Beanie') {
-                            
-                            // font scripts 
-                            wp_register_style('ssbaFont', '//fonts.googleapis.com/css?family=Reenie+Beanie');
-                            wp_enqueue_style( 'ssbaFont');
-                    }		
-            //}
+                    //if ($arrSettings['ssba_font_family'] == 'Indie Flower') {
+                    //
+                    //        // font scripts 
+                    //        wp_register_style('ssbaFont', '//fonts.googleapis.com/css?family=Indie+Flower');
+                    //        wp_enqueue_style( 'ssbaFont');
+                    //} else if ($arrSettings['ssba_font_family'] == 'Reenie Beanie') {
+                    //        
+                    //        // font scripts 
+                    //        wp_register_style('ssbaFont', '//fonts.googleapis.com/css?family=Reenie+Beanie');
+                    //        wp_enqueue_style( 'ssbaFont');
+                    //}		
             
     }
     
